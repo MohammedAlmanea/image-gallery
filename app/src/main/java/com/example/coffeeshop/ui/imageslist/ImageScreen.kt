@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.GridItemSpan
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -28,58 +29,73 @@ fun ImageScreen(viewModel: ImagesViewModel = hiltViewModel() )
     val state = viewModel.state.value
     Surface(
         modifier = Modifier.fillMaxSize()
+            ,color = MaterialTheme.colors.secondaryVariant
     )
-
     {
-        LazyVerticalGrid(
-            cells = GridCells.Adaptive(150.dp)
-                        ,modifier = Modifier.background(MaterialTheme.colors.secondaryVariant)
-        )
-        {
-            item(span = { GridItemSpan(5) })
+        if (state.isLoading || state.error.isNotEmpty()) {
+            // both error and isLoading need a box to align content
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            )
             {
+                if (state.isLoading)
+                    CircularProgressIndicator()
+                if (state.error.isNotEmpty())
+                    Text(text = state.error)
+            }
+        } else { //then state is success
 
-
-                Box()
+            LazyVerticalGrid(
+                cells = GridCells.Adaptive(150.dp),
+                modifier = Modifier.background(MaterialTheme.colors.secondaryVariant)
+            )
+            {
+                item(span = { GridItemSpan(5) })
                 {
-                    Box(
-                        Modifier
-                            .width(350.dp)
-                            .height(120.dp)
-                            .clip(MaterialTheme.shapes.large)
-                            .align(Alignment.Center)
-                    )
+
+
+                    Box()
                     {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(vertical = 16.dp)
-                                .background(MaterialTheme.colors.primaryVariant),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
+                        Box(
+                            Modifier
+                                .width(350.dp)
+                                .height(120.dp)
+                                .clip(MaterialTheme.shapes.large)
+                                .align(Alignment.Center)
                         )
                         {
-                            Text(
-                                text = "Welcome to my coffee shop",
-                                style = MaterialTheme.typography.caption
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(vertical = 16.dp)
+                                    .background(MaterialTheme.colors.primaryVariant),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
                             )
-                            Text(
-                                text = "( ﾉ ﾟｰﾟ)ﾉ＼(ﾟｰﾟ＼)",
-                                style = MaterialTheme.typography.caption
-                            )
+                            {
+                                Text(
+                                    text = "Welcome to my coffee shop",
+                                    style = MaterialTheme.typography.caption
+                                )
+                                Text(
+                                    text = "( ﾉ ﾟｰﾟ)ﾉ＼(ﾟｰﾟ＼)",
+                                    style = MaterialTheme.typography.caption
+                                )
 
+                            }
                         }
                     }
                 }
+                items(
+                    state.images
+                )
+                {
+                    Log.e("ImagesScreen", "${state.images}")
+                    ImageCard(it)
+                }
             }
-            items(
-               state.images
-            )
-            {
-                Log.e("ImagesScreen","${state.images}")
-                ImageCard(it)
-            }
-        }
 
+        }
     }
 }

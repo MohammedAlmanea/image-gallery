@@ -26,7 +26,7 @@ class ImageRepository @Inject constructor(
         }
         catch (e: IOException)
         {
-            emit(Response.Error<List<Image>>("Failed ot connect to server"))
+            emit(Response.Error<List<Image>>("Failed ot connect to server\n┗( T﹏T )┛"))
         }
 
     }
