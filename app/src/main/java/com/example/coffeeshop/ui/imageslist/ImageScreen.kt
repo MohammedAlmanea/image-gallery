@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -27,13 +28,12 @@ fun ImageScreen(viewModel: ImagesViewModel = hiltViewModel() )
     val state = viewModel.state.value
     Surface(
         modifier = Modifier.fillMaxSize()
-//                        .background(Color(0xFF1f1f2e))
     )
 
     {
         LazyVerticalGrid(
             cells = GridCells.Adaptive(150.dp)
-//                        ,modifier = Modifier.background(Color(0xFF1f1f2e))
+                        ,modifier = Modifier.background(MaterialTheme.colors.secondaryVariant)
         )
         {
             item(span = { GridItemSpan(5) })

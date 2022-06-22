@@ -20,9 +20,11 @@ val fontFamily = FontFamily(
 val Typography = Typography(
 
     body1 = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
+        fontFamily = fontFamily,
+        fontSize = 20.sp,
+        textAlign = TextAlign.Center,
+        color = Color.Black,
+        letterSpacing = 0.6.sp
     ),
     caption = TextStyle(
         fontFamily = fontFamily,
