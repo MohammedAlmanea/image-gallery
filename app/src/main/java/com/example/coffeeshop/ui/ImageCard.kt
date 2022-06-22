@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.example.coffeeshop.data.domin.Image
@@ -21,15 +22,15 @@ fun ImageCard(pic1 : Image)
     Card(
         elevation = 15.dp,
 //        shape = MaterialTheme.shapes.small,
-        shape = RoundedCornerShape(26.dp)
+        shape = RoundedCornerShape(16.dp)
        , modifier = Modifier
-            .padding(horizontal = 6.dp)
+            .padding(horizontal = 5.dp)
             .padding(vertical = 10.dp)
             .border(
                 2.dp,
-                MaterialTheme.colors.secondary.copy(alpha = 0.8f),
+                Color.Black,
 //                MaterialTheme.shapes.small
-                RoundedCornerShape(26.dp)
+                RoundedCornerShape(16.dp)
             )
     ) {
         Box(modifier = Modifier.size(300.dp))
@@ -37,7 +38,7 @@ fun ImageCard(pic1 : Image)
             NetworkImage(
                 url = pic1.downloadUrl,
                 contentDesc =null,
-                modifier = Modifier.size(400.dp)
+                modifier = Modifier.size(300.dp)
             )
             Text(
                 text = pic1.author,
