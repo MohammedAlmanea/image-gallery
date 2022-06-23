@@ -75,7 +75,7 @@ fun ImageScreen(viewModel: ImagesViewModel = hiltViewModel() )
                             )
                             {
                                 Text(
-                                    text = "Welcome to my coffee shop",
+                                    text = "Welcome to my images gallery",
                                     style = MaterialTheme.typography.caption
                                 )
                                 Text(

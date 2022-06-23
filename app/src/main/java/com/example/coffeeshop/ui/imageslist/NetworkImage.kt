@@ -25,8 +25,8 @@ fun NetworkImage(
     {
         val painter = rememberImagePainter(data = url,
             builder = {
-                placeholder(drawableResId = R.drawable.placeholder)
-                crossfade(true)
+                placeholder(drawableResId = R.drawable.placeholder).crossfade(true)
+
             }
         )
         Image(
